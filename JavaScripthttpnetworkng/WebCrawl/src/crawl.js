@@ -12,7 +12,6 @@ function getURLsFromHTML(htmlBody, baseURL) {
             } catch (err) {
                 console.log(`error with relative url: ${err.message}`)
             }
-
         } else {
             try {
                 const urlObj = new URL(linkElement.href)
@@ -20,9 +19,7 @@ function getURLsFromHTML(htmlBody, baseURL) {
             } catch (err) {
                 console.log(`error with absoulte url: ${err.message}`)
             }
-
         }
-
     }
     return urls
 }
