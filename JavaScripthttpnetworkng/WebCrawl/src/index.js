@@ -10,18 +10,21 @@ third argument:
 is one we are actually passing into
 our program
 */
-function index() {
+async function index() {
     if (process.argv.length < 3) {
         console.log("no website provided")
         process.exit(1)
     }
     if (process.argv.length > 3) {
-        console.log("to0 many command like args")
+        console.log("too many command like args")
         process.exit(1)
     }
     const baseURL = process.argv[2]
     console.log(`crawl baby crawl URL:${baseURL}`)
-    crawlPage(baseURL)
+    const pages = await crawlPage(baseURL, baseURL, {})
+    for (const page of Object.entries(pages)) {
+        console.log(page)
+    }
 }
 
 index()
