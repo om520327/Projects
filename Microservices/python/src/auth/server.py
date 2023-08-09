@@ -1,3 +1,5 @@
+# GATWAY SERVICE
+
 import jwt, datetime, os
 from flask import Flask, request
 from flask_mysqldb import MySQL
@@ -19,6 +21,39 @@ def login():
     if not auth:
         return "missing credentials",401 
 
-
 # check db for credentials 
+    cur = mysql.connection.cursor()
+    res = cur.execute(
+        "SELECT email, password FROM user WHERE email=%s", 
+        (auth.username,)
+    )
+    if res > 0:
+       user_row = cur.fetchone()
+       email = user_row[0]
+       password  = user_row[1] 
+
+       if auth.username != email or auth.password != password:
+           return "invalid credentials", 401
+       else:
+           return createJWT(auth.username, os.environ.get("JWT_SECRET"),True)
+    else:
+        return "invalid crdentials", 401
+
+#function to create json web token 
+def createJWT(username, secret, authz):
+    return jwt.encode(
+        {
+            "username": username,
+            #seting token expire to 24hour 
+            "exp": datetime.datetime.utcnow() + 
+            datetime.timedelta(days =1),
+            #when token is issued 
+            "iat": datetime.datetime.utcnow(),
+            # admin or not 
+            "admin": authz,
+        },
+        secret,
+        algorithm="HS256",
+    )
+           
 
