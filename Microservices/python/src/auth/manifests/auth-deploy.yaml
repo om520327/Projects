@@ -1,18 +1,29 @@
+#apiVersion, kind, metadata, spec required fields
+#deployment knows which pods get deployed because in selector
+#we say with matchlabel what labels the pod must have to get
+#deployed
+
 apiVersion: apps/v1
 kind: Deployment
+#data that helps unq identify obj
 metadata:
   name: auth
   labels:
     app: auth
+#desired state of object
 spec:
   replicas: 2
   selector:
     matchLabels:
       app: auth
+  #deplyment startagy for replacing exsisting pods with new ones
   strategy:
     type: RollingUpdate
     rollingUpdate:
+      #max number of pods that can be created above our replicas
+      #for updating
       maxSurge: 3
+  #what our pods will look like (pod spec)
   template:
     metadata:
       labels:
