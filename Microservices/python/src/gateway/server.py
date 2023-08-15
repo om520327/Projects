@@ -35,7 +35,31 @@ def login():
     else:
         return err
 
+@server.route("/upload", methods=["POST"])
+def upload():
+#need to make sure user has token from login
+    access, err  = validate.token(request)   
+#convert json string to python object 
+    access = json.loads(access)
 
+    if access["admin"]:
+        if len(request.files) > 1 or len(request < 1):
+            return "exact one file plya", 400
+        for _, f in request.files.items():
+            err = util.upload(f, fs, channel, access)
+
+            if err:
+                return err
+        return "you did it plya", 200
+    else:
+        return "nice try not authorized", 401 
+    
+@server.route("/download", methods=["GET"])
+def download():
+    pass
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=8080)
 
 
 
