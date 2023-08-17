@@ -1,0 +1,39 @@
+#allows us to allow traffic to accsses our gateway endpoint
+#a service is like a grodup of pods and we want it to be
+#able to scale up to multiple instances or multiple pods
+#service comes in and groups all instances of gatway server
+#by using labelselector this allows us to forget about
+#individual IPs for each pod or instance
+#so now we can send request to the servers cluster ip(internal kub ip)
+#and it will know which pods to get it to
+#we need to allow req from outsidde our cluster to hit our gateway
+#services endpoints. This is where the ingress comes in
+#an ingress consists of a load balancer that is essentially
+#the entry point to our cluster and a set of rules
+#those rules say which req go where
+#we have a rule that any req that hits our load balancer via the
+#domain name mp3converter.com should be routed to gateway service
+#this can also route traffic to diff cluster IPs within the cluster
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  #config for nginx ingress(our load balancer)
+  annotations:
+    #allows any body size not good for pro
+    nginx.ingress.kubernetes.io/proxy-body-size: '0'
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '600'
+    nginx.ingress.kubernetes.io/proxy-send-timeout: '600'
+spec:
+  rules:
+    - host: mp3converter.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 8080
