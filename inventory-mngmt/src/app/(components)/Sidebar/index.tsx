@@ -1,8 +1,41 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
-import { Menu } from "lucide-react";
+import { LucideIcon, Menu } from "lucide-react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
+
+interface SidebarLinkProps {
+  href: string;
+  icon: LucideIcon;
+  label: string;
+  isCollapsed: boolean;
+}
+
+const SidebarLink = ({
+  href,
+  icon: icon,
+  label,
+  isCollapsed,
+}: SidebarLinkProps) => {
+  /* usepathname form nextnav which will grab url of where we are for diff href in sidebar */
+  const pathname = usePathname();
+  /* which url is active in sidebar (the one u are clicked on) */
+  const isActive =
+    pathname === href || (pathname === "/" && href === "/dashboard");
+  return (
+    <Link href={href}>
+      <div
+        className={`cursor-pointer flex items-center ${
+          isCollapsed ? "justify-center py-4" : "justify-start px-8 py-4"
+        } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
+          isActive ? "bg-blue-200 text-white" : ""
+        }`}
+      ></div>
+    </Link>
+  );
+};
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -20,9 +53,19 @@ const Sidebar = () => {
   return (
     <div className={sidebarClassNames}>
       {/*LOGO*/}
-      <div className="flex gap-3 justify-between md:justify-normal items-center pt-8">
+      <div
+        className={`flex gap-3 justify-between md:justify-normal items-center pt-8 ${
+          isSidebarCollapsed ? "px-5" : "px-8"
+        }`}
+      >
         <div>logo</div>
-        <h1 className="font-extrabold text-2xl">SStock</h1>
+        <h1
+          className={`${
+            isSidebarCollapsed ? "hidden" : "block"
+          } font-extrabold text-2xl`}
+        >
+          SStock
+        </h1>
 
         <button
           className="md:hidden px-3 py-3 bg-gray-100 rounded-full hover:bg-blue-100"
