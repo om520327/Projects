@@ -9,7 +9,7 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
   const isSidebarCollapsed = useAppSelector(
     (state) => state.global.isSidebarCollapsed
   );
-
+  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   {
     /* if in dark mode "dark" needs to be added to the html element same with "light" */
   }
@@ -21,7 +21,6 @@ const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
     }
   });
 
-  const isDarkMode = useAppSelector((state) => state.global.isDarkMode);
   return (
     <div
       className={`${
