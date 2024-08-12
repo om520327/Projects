@@ -1,7 +1,6 @@
 import React from "react";
 import Navbar from "@/app/(components)/Navbar";
 import Sidebar from "@/app/(components)/Sidebar";
-type Props = {};
 
 const Dashboardwrapper = ({ children }: { children: React.ReactNode }) => {
   return (
