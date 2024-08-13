@@ -15,7 +15,7 @@ interface SidebarLinkProps {
 
 const SidebarLink = ({
   href,
-  icon: icon,
+  icon: Icon,
   label,
   isCollapsed,
 }: SidebarLinkProps) => {
@@ -32,7 +32,17 @@ const SidebarLink = ({
         } hover:text-blue-500 hover:bg-blue-100 gap-3 transition-colors ${
           isActive ? "bg-blue-200 text-white" : ""
         }`}
-      ></div>
+      >
+        <Icon className="w-6 h-6 !text-gray-700" />
+
+        <span
+          className={`${
+            isCollapsed ? "hidden" : "block"
+          } font-medium text-gray-700`}
+        >
+          {label}
+        </span>
+      </div>
     </Link>
   );
 };
