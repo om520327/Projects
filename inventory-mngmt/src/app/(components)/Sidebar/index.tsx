@@ -1,7 +1,16 @@
 "use client";
 import { useAppDispatch, useAppSelector } from "@/app/redux";
 import { setIsSidebarCollapsed } from "@/state";
-import { LucideIcon, Menu } from "lucide-react";
+import {
+  Archive,
+  CircleDollarSign,
+  Clipboard,
+  Layout,
+  LucideIcon,
+  Menu,
+  SlidersHorizontal,
+  User,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -21,7 +30,7 @@ const SidebarLink = ({
 }: SidebarLinkProps) => {
   /* usepathname form nextnav which will grab url of where we are for diff href in sidebar */
   const pathname = usePathname();
-  /* which url is active in sidebar (the one u are clicked on) */
+  /* which url is active in sidebar (the one u are clicked on (highlighted)) */
   const isActive =
     pathname === href || (pathname === "/" && href === "/dashboard");
   return (
@@ -84,8 +93,46 @@ const Sidebar = () => {
           <Menu className="w-4 h-4" />
         </button>
       </div>
-      <div className="flex-grow mt-8">{/* links*/}</div>
-      <div>
+      {/* LINKS */}
+      <div className="flex-grow mt-8">
+        <SidebarLink
+          href="/dashboard"
+          icon={Layout}
+          label="Dashboard"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/inventory"
+          icon={Archive}
+          label="Inventory"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/products"
+          icon={Clipboard}
+          label="Products"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/users"
+          icon={User}
+          label="Users"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/settings"
+          icon={SlidersHorizontal}
+          label="Settings"
+          isCollapsed={isSidebarCollapsed}
+        />
+        <SidebarLink
+          href="/expenses"
+          icon={CircleDollarSign}
+          label="Expenses"
+          isCollapsed={isSidebarCollapsed}
+        />
+      </div>
+      <div className={`${isSidebarCollapsed ? "hidden" : "block"} mb-10`}>
         <p className="text-center text-xs text-gray-500">&copy; 2024 Sstock</p>
       </div>
     </div>
