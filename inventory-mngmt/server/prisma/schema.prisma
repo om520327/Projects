@@ -21,7 +21,7 @@ model Products{
   name String
   price Float
   rating Float?
-  StockQuant Int
+  stockQuantity Int
   // "[]" is how you identify FK
   Sales Sales[]
   Purchases Purchases[]
