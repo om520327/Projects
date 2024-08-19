@@ -20,6 +20,9 @@ app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use((0, cors_1.default)());
 /* ROUTES */
+app.get("/hello", (req, res) => {
+    res.send("yuhhhhhh");
+});
 /* SERVER */
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

@@ -19,6 +19,10 @@ app.use(cors());
 
 /* ROUTES */
 
+app.get("/hello", (req, res) => {
+  res.send("yuhhhhhh");
+});
+
 /* SERVER */
 const port = process.env.PORT || 3001;
 
