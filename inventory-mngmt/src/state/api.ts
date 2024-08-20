@@ -1,10 +1,35 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export interface Product {}
-export interface SalesSummary {}
-export interface PurchaseSummary {}
-export interface ExpenseSummary {}
-export interface ExpenseByCategorySummary {}
+export interface Product {
+  productId: string;
+  name: string;
+  price: number;
+  rating?: number;
+  stockQuantity: number;
+}
+export interface SalesSummary {
+  salesSummaryId: string;
+  totalValue: number;
+  changePercentage?: number;
+  date: string;
+}
+export interface PurchaseSummary {
+  purchaseSummaryId: string;
+  totalPurchased: number;
+  changePercentage?: number;
+  date: string;
+}
+export interface ExpenseSummary {
+  expenseSummaryId: string;
+  totalExpenses: number;
+  date: string;
+}
+export interface ExpenseByCategorySummary {
+  expenseByCategorySummaryId: string;
+  category: number;
+  amount: string;
+  date: string;
+}
 
 export interface DashboardMetrics {
   popularProducts: Product[];
@@ -20,7 +45,7 @@ export const api = createApi({
   tagTypes: ["DashboardMetrics"],
   endpoints: (build) => ({
     /* to make api call from frontend to backend we will use 
-     reduxjs/toolkit/query. we will create a type called "DashboardMetrics" 
+     reduxjs/toolkit/query/react. we will create a type called "DashboardMetrics" 
      (what we want / type/value we are getting from backend) "void" is what we are
      sending to the query. in our case it is void because this is a getReq   */
     getDashboardMetrics: build.query<DashboardMetrics, void>({
@@ -36,4 +61,4 @@ export const api = createApi({
   }),
 });
 
-export const {} = api;
+export const { useGetDashboardMetricsQuery } = api;
