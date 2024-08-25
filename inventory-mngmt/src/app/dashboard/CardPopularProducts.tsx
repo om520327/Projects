@@ -12,10 +12,13 @@ const CardPopularProducts = () => {
         <div className="m-5 ">Fetching Data...</div>
       ) : (
         <>
-          <h3 className="text-lg font-semibold px-7 pt-5 pb-2">
-            Popular Stuffs
-          </h3>
-          <hr />
+          <div>
+            <h3 className="text-lg font-semibold px-7 pt-5 pb-2">
+              Popular Stuffs
+            </h3>
+            <hr />
+          </div>
+
           <div className="overflow-auto h-full">
             {dashboardMetrics?.popularProducts.map((product) => (
               <div
