@@ -15,8 +15,24 @@ type StatCardProps = {
   dateRange: string;
 };
 
-const StatCard = (props: StatCardProps) => {
-  return <div>StatCard</div>;
+const StatCard = ({
+  title,
+  primaryIcon,
+  details,
+  dateRange,
+}: StatCardProps) => {
+  const formatPercentage = (value: number) => {
+    const signal = value >= 0 ? "+" : "";
+    return `${signal}${value.toFixed()}%`;
+  };
+  const getChangeColour = (value: number) => {
+    value >= 0 ? "text-green-500" : "text-red-500";
+  };
+  return (
+    <div className="md:row-span-1 xl:row-span-2 bg-white col-span-1 shadow-md rounded-2xl flex flex-col justify-between">
+      StatCard
+    </div>
+  );
 };
 
 export default StatCard;
