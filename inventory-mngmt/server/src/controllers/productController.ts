@@ -24,3 +24,25 @@ export const getProducts = async (
     res.status(500).json({ message: "Error fetching Products" });
   }
 };
+
+export const createProduct = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  try {
+    //thanks to bodyparser we can grab the req and parse it in a format that we can use.
+    const { productId, name, price, rating, stockQuantity } = req.body;
+    const product = await prisma.products.create({
+      data: {
+        productId,
+        name,
+        price,
+        rating,
+        stockQuantity,
+      },
+    });
+    res.status(201).json(product);
+  } catch (error) {
+    res.status(500).json({ message: "Error Creating Product" });
+  }
+};
