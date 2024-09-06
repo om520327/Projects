@@ -42,7 +42,7 @@ export interface DashboardMetrics {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics"],
+  tagTypes: ["DashboardMetrics", "Products"],
   endpoints: (build) => ({
     /* to make api call from frontend to backend we will use 
      reduxjs/toolkit/query/react. we will create a type called "DashboardMetrics" 
@@ -58,6 +58,15 @@ export const api = createApi({
       need to update (refetch API for updated set of data)*/
       providesTags: ["DashboardMetrics"],
     }),
+    /* we add the string for the search query we did in productController (there could or could not be a string)   */
+    getProducts: build.query<Product[], string | void>({
+      query: (search) => ({
+        url: "/products",
+        params: search ? { search } : {},
+      }),
+      providesTags: ["Products"],
+    }),
+    /* MUTATION CALL (anything that is not a get,update,post,put,delete(anything that changes))*/
   }),
 });
 
