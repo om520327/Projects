@@ -7,6 +7,12 @@ export interface Product {
   rating?: number;
   stockQuantity: number;
 }
+export interface NewProduct {
+  name: string;
+  price: number;
+  rating?: number;
+  stockQuantity: number;
+}
 export interface SalesSummary {
   salesSummaryId: string;
   totalValue: number;
@@ -30,7 +36,6 @@ export interface ExpenseByCategorySummary {
   amount: string;
   date: string;
 }
-
 export interface DashboardMetrics {
   popularProducts: Product[];
   salesSummary: SalesSummary[];
@@ -67,7 +72,20 @@ export const api = createApi({
       providesTags: ["Products"],
     }),
     /* MUTATION CALL (anything that is not a get,update,post,put,delete(anything that changes))*/
+    createProduct: build.mutation<Product, NewProduct>({
+      query: (newProduct) => ({
+        url: "/products",
+        method: "POST",
+        body: newProduct,
+      }),
+      /* Everytime you create a Product the list in Products gets invalidated  meaning another API req will be sent automatically.*/
+      invalidatesTags: ["Products"],
+    }),
   }),
 });
 
-export const { useGetDashboardMetricsQuery } = api;
+export const {
+  useGetDashboardMetricsQuery,
+  useGetProductsQuery,
+  useCreateProductMutation,
+} = api;
