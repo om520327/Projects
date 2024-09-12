@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { getUsers } from "../../server/src/controllers/userController";
 
 export interface Product {
   productId: string;
@@ -44,10 +45,16 @@ export interface DashboardMetrics {
   expenseByCategorySummary: ExpenseByCategorySummary[];
 }
 
+export interface User {
+  userId: string;
+  name: string;
+  email: string;
+}
+
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics", "Products"],
+  tagTypes: ["DashboardMetrics", "Products", "Users"],
   endpoints: (build) => ({
     /* to make api call from frontend to backend we will use 
      reduxjs/toolkit/query/react. we will create a type called "DashboardMetrics" 
@@ -81,6 +88,10 @@ export const api = createApi({
       /* Everytime you create a Product the list in Products gets invalidated  meaning another API req will be sent automatically.*/
       invalidatesTags: ["Products"],
     }),
+    getUsers: build.query<User[], void>({
+      query: () => "/users",
+      providesTags: ["Users"],
+    }),
   }),
 });
 
@@ -88,4 +99,5 @@ export const {
   useGetDashboardMetricsQuery,
   useGetProductsQuery,
   useCreateProductMutation,
+  useGetUsersQuery,
 } = api;
