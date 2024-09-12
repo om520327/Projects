@@ -1,9 +1,17 @@
 "use client";
-import { useGetProductsQuery } from "@/state/api";
+import { useCreateProductMutation, useGetProductsQuery } from "@/state/api";
 import { PlusCircle, SearchIcon } from "lucide-react";
 import { useState } from "react";
 import Header from "@/app/(components)/Header";
 import Ratings from "@/app/(components)/Rating";
+import CreateProductModal from "./CreateProductModal";
+
+type ProductFormData = {
+  name: string;
+  price: number;
+  stockQuantity: number;
+  rating: number;
+};
 
 const Products = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -13,6 +21,15 @@ const Products = () => {
     isError,
     isLoading,
   } = useGetProductsQuery(searchTerm);
+
+  {
+    /* Create Product Mutation API call 
+    array instead of object we grab create product and that is the function that calls the api call*/
+  }
+  const [createProduct] = useCreateProductMutation();
+  const handleCreateProduct = async (productData: ProductFormData) => {
+    await createProduct(productData);
+  };
 
   if (isLoading) {
     return <div className="py-4">LOADING....</div>;
@@ -82,6 +99,11 @@ const Products = () => {
       </div>
 
       {/* MODAL */}
+      <CreateProductModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onCreate={handleCreateProduct}
+      />
     </div>
   );
 };
