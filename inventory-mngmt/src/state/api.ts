@@ -1,5 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { getUsers } from "../../server/src/controllers/userController";
+import { getExpensesByCategory } from "../../server/src/controllers/expenseController";
 
 export interface Product {
   productId: string;
@@ -54,7 +55,7 @@ export interface User {
 export const api = createApi({
   baseQuery: fetchBaseQuery({ baseUrl: process.env.NEXT_PUBLIC_API_BASE_URL }),
   reducerPath: "api",
-  tagTypes: ["DashboardMetrics", "Products", "Users"],
+  tagTypes: ["DashboardMetrics", "Products", "Users", "Expenses"],
   endpoints: (build) => ({
     /* to make api call from frontend to backend we will use 
      reduxjs/toolkit/query/react. we will create a type called "DashboardMetrics" 
@@ -92,6 +93,10 @@ export const api = createApi({
       query: () => "/users",
       providesTags: ["Users"],
     }),
+    getExpensesByCategory: build.query<ExpenseByCategorySummary[], void>({
+      query: () => "/expenses",
+      providesTags: ["Expenses"],
+    }),
   }),
 });
 
@@ -100,4 +105,5 @@ export const {
   useGetProductsQuery,
   useCreateProductMutation,
   useGetUsersQuery,
+  useGetExpensesByCategoryQuery,
 } = api;
