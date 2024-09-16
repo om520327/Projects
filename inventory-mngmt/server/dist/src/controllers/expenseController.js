@@ -9,8 +9,21 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getDashboardMetrics = void 0;
+exports.getExpensesByCategory = void 0;
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-const getDashboardMetrics = (req, res) => __awaiter(void 0, void 0, void 0, function* () { });
-exports.getDashboardMetrics = getDashboardMetrics;
+const getExpensesByCategory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const expenseByCategorySummaryRaw = yield prisma.expenseByCategory.findMany({
+            orderBy: {
+                date: "desc",
+            },
+        });
+        const expenseByCategorySummary = expenseByCategorySummaryRaw.map((item) => (Object.assign(Object.assign({}, item), { amount: item.amount.toString() })));
+        res.json(expenseByCategorySummary);
+    }
+    catch (err) {
+        res.status(500).json({ message: "Error fetching expense by catagory" });
+    }
+});
+exports.getExpensesByCategory = getExpensesByCategory;
