@@ -1,17 +1,21 @@
+import os
+from dotenv import load_dotenv
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+load_dotenv()
 #selenium script is resulting in the browser closing automatically is because it has reached the end of execution.
 #need to add "detach option" to detach browser from script
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-#c_Service = Service(executable_path="C:\Drivers\chromedriver-win64\chromedriver.exe")
+chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
+#serv_obj = Service(executable_path=chrome_driver_path)
 
 #driver is an object of the chrome class
 #opens chrome
-#driver = webdriver.Chrome(service = c_Service, options=options)
+#driver = webdriver.Chrome(service = serv_obj, options=options)
 driver = webdriver.Chrome(options=options)
 #goes to specific url
 driver.get("https://opensource-demo.orangehrmlive.com/auth/login")

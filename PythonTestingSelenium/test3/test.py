@@ -1,3 +1,5 @@
+import os
+from dotenv import load_dotenv
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
@@ -7,10 +9,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
-
+load_dotenv()
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-serv_obj = Service(executable_path="C:\Drivers\chromedriver-win64\chromedriver.exe")
+# Retrieve the path from the environment variable
+chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
+serv_obj = Service(executable_path=chrome_driver_path)
 driver = webdriver.Chrome(service=serv_obj,options=options)
 driver.get("https://practice-automation.com/")
 wait = WebDriverWait(driver,10)
