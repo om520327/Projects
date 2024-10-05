@@ -10,12 +10,14 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
 
 load_dotenv()
+chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
+#chrome_driver_path ='C:\Drivers\chromedriver-win64\chromedriver.exe'
+print(f"ChromeDriver path: {chrome_driver_path}")
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
-# Retrieve the path from the environment variable
-chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
 serv_obj = Service(executable_path=chrome_driver_path)
 driver = webdriver.Chrome(service=serv_obj,options=options)
+
 driver.get("https://practice-automation.com/")
 wait = WebDriverWait(driver,10)
 driver.maximize_window()
@@ -46,3 +48,12 @@ desired_value = 0.5 * max_value
 offset = ((desired_value - min_value) / (max_value - min_value)) * slider_width
 #Drag the slider by an offset (e.g., 50 pixels to the right)
 actions.click_and_hold(slider).move_by_offset(offset, 0).release().perform()
+time.sleep(2)
+#CSS Selectors 
+#tag always optional to include 
+#Tag with attribute(Tag[attributename=attributevalue])
+driver.find_element(By.CSS_SELECTOR,"a[rel=home]").click()
+#Tag with ID (Tag#IDvalue)
+#Tag and class(Tag.classvalue)
+#Tag and Class And Attribute(Tag.classvalue[attributename=attributevalue]) 
+
