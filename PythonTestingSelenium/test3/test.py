@@ -11,8 +11,6 @@ from selenium.webdriver.common.keys import Keys
 
 load_dotenv()
 chrome_driver_path = os.getenv('CHROME_DRIVER_PATH')
-#chrome_driver_path ='C:\Drivers\chromedriver-win64\chromedriver.exe'
-print(f"ChromeDriver path: {chrome_driver_path}")
 options = webdriver.ChromeOptions()
 options.add_experimental_option("detach", True)
 serv_obj = Service(executable_path=chrome_driver_path)
