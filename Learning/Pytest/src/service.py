@@ -1,3 +1,4 @@
+import requests
 #mocking: when you want to test a DB or API but dont want to use the actual
 #source due to them being slow or not stable or have changing data within them
 #you make a mock of whatever you are testing and test for the desired outcome
@@ -14,3 +15,11 @@ database = {
 
 def get_user_from_db(user_id):
     return database.get(user_id)
+
+
+def get_users():
+    response = requests.get("https://jsonplaceholder.typicode.com/users")
+    if response.status_code == 200:
+        return response.json()
+    
+    raise requests.HTTPError
