@@ -18,7 +18,7 @@ const Users = () => {
   }
 
   if (isError || !users) {
-    return <div className="text-center text-red-500 py-4">Can't get Users</div>;
+    return <div className="text-center text-red-500 py-4">Cant get Users</div>;
   }
 
   return (

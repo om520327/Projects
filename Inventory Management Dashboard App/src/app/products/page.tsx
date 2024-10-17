@@ -37,7 +37,7 @@ const Products = () => {
 
   if (isError || !products) {
     return (
-      <div className="text-center text-red-500 py-4">Can't get Products</div>
+      <div className="text-center text-red-500 py-4">Cant get Products</div>
     );
   }
 
