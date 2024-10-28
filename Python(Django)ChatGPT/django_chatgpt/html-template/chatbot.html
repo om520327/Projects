@@ -83,6 +83,8 @@
     <br /><br />
   </div>
   <form class="message-form">
+    <!-- need '{%csrf_token%}' for submitting forms in django (security purpose)
+     error will come up without it -->
     {%csrf_token%}
     <div class="input-group">
       <input
@@ -96,5 +98,39 @@
     </div>
   </form>
 </div>
+
+<!-- query selector will match name to above and store its content in variable -->
+<script>
+  const messagesList = document.querySelector(".messages-list");
+  const messageForm = document.querySelector(".message-form");
+  const messageInput = document.querySelector(".message-input");
+
+  messageForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    const message = messageInput.value.trim();
+    //if someone clicks on submit without actually typing message we just return
+    if (message.length === 0) {
+      return;
+    }
+
+    //adding a list element to messageItem
+    const messageItem = document.createElement("li");
+    // in that list add class message and sent
+    messageItem.classList.add("message", "sent");
+    messageItem.innerHTML = `
+    <div class="message-text">
+      <div class="message-sender>
+        <b>You</b>
+      </div>
+      <div class="message-content">
+        ${message}
+      </div>
+    </div>`;
+    messagesList.appendChild(messageItem);
+    messageInput.value = "";
+    // next send msg to backend (so it is stored and can be seen on the screen) use openAI api (in our case LM Studio) to get response from AI
+  });
+</script>
 
 {% endblock %}
