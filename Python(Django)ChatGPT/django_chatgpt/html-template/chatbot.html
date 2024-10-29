@@ -115,19 +115,21 @@
     }
 
     //adding a list element to messageItem
+
     const messageItem = document.createElement("li");
     // in that list add class message and sent
     messageItem.classList.add("message", "sent");
     messageItem.innerHTML = `
-    <div class="message-text">
-      <div class="message-sender>
-        <b>You</b>
-      </div>
-      <div class="message-content">
-        ${message}
-      </div>
-    </div>`;
+        <div class="message-text">
+            <div class="message-sender">
+                <b>You</b>
+            </div>
+            <div class="message-content">
+                ${message}
+            </div>
+        </div>`;
     messagesList.appendChild(messageItem);
+
     messageInput.value = "";
     // next send msg to backend (so it is stored and can be seen on the screen) use openAI api (in our case LM Studio) to get response from AI
     fetch("", {
@@ -146,17 +148,17 @@
         const messageItem = document.createElement("li");
         messageItem.classList.add("message", "received");
         messageItem.innerHTML = `
-    <div class="message-text">
-      <div class="message-sender>
-        <b>AI Chatbot</b>
-      </div>
-      <div class="message-content">
-        ${response}
-      </div>
-    </div>`;
+        <div class="message-text">
+            <div class="message-sender">
+              <b>AI Chatbot</b>
+            </div>
+            <div class="message-content">
+                ${response}
+            </div>
+        </div>
+          `;
         messagesList.appendChild(messageItem);
       });
   });
 </script>
-
 {% endblock %}
