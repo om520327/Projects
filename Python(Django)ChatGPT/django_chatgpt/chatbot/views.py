@@ -1,6 +1,10 @@
+import os
 from django.shortcuts import render
 from django.http import JsonResponse
+from dotenv import load_dotenv
 
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
 # Create your views here.
 #we specified in setting.py what directory to use for our templates 
 #so our program knows the location of where chatbot.html is 
