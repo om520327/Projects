@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from dotenv import load_dotenv
 from openai import OpenAI
+from django.contrib import auth
 
 ### Since we are using LLM STUDIO set up is a little different than openai ###
 # load_dotenv()
@@ -48,3 +49,15 @@ def chatbot(request):
         return JsonResponse({'messsage':message, 'response':response})
 
     return render(request,'chatbot.html')
+
+
+def login(request):
+    return render(request,'login.html')
+
+
+def register(request):
+    return render(request,'register.html')
+
+
+def logout(request):
+    auth.logout(request)

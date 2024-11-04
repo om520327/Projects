@@ -1,5 +1,8 @@
-{% extends 'default.html' %} {% block title %}Register{% endblock %} {% block
-styles %}
+{% extends 'default.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block styles %}
 <style>
   body {
     background-color: #f0f0f0;
@@ -31,8 +34,7 @@ styles %}
     display: block;
     margin-bottom: 5px;
   }
-  input[type="text"],
-  input[type="password"] {
+  input[type=text], input[type=password] {
     border-radius: 4px;
     border: 1px solid #ccc;
     padding: 10px;
@@ -41,7 +43,7 @@ styles %}
     box-sizing: border-box;
     margin-bottom: 10px;
   }
-  button[type="submit"] {
+  button[type=submit] {
     background-color: #007bff;
     color: white;
     font-size: 16px;
@@ -52,7 +54,7 @@ styles %}
     cursor: pointer;
     width: 100%;
   }
-  button[type="submit"]:hover {
+  button[type=submit]:hover {
     background-color: #0062cc;
   }
   .alert-danger {
@@ -64,55 +66,33 @@ styles %}
     border-radius: 4px;
   }
 </style>
-{% endblock %} {% block content %}
+{% endblock %}
+
+{% block content %}
 <div class="register-container">
   <div class="card">
     <div class="card-header">Register</div>
     <div class="card-body">
       {% if error_message %}
-      <div class="alert alert-danger" role="alert">{{ error_message }}</div>
+        <div class="alert alert-danger" role="alert">{{ error_message }}</div>
       {% endif %}
       <form method="post">
         {% csrf_token %}
         <div class="form-group">
           <label for="username">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            name="username"
-            required
-          />
+          <input type="text" class="form-control" id="username" name="username" required>
         </div>
         <div class="form-group">
           <label for="email">Email</label>
-          <input
-            type="text"
-            class="form-control"
-            id="email"
-            name="email"
-            required
-          />
+          <input type="text" class="form-control" id="email" name="email" required>
         </div>
         <div class="form-group">
           <label for="password1">Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password1"
-            name="password1"
-            required
-          />
+          <input type="password" class="form-control" id="password1" name="password1" required>
         </div>
         <div class="form-group">
           <label for="password2">Confirm Password</label>
-          <input
-            type="password"
-            class="form-control"
-            id="password2"
-            name="password2"
-            required
-          />
+          <input type="password" class="form-control" id="password2" name="password2" required>
         </div>
         <button type="submit">Register</button>
       </form>
