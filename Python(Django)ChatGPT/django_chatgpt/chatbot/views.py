@@ -46,13 +46,18 @@ def response_ai(message):
 # We specified in setting.py what directory to use for our templates 
 # So our program knows the location of where chatbot.html is 
 def chatbot(request):
+    # for displaing user chat history even after refresh
+    # returns all chats for the specific user(currently logged in user) that is stored on our db
+    chats = Chat.objects.filter(user=request.user)
+
     if request.method == 'POST':
         message = request.POST.get('message')
         response = response_ai(message)
         chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now)
         chat.save()
         return JsonResponse({'messsage':message, 'response':response})
-    return render(request,'chatbot.html')
+    # now our chatbot.html has accsses to chat history of logged in user  
+    return render(request,'chatbot.html', {'chats': chats})
 
 
 def login(request):
