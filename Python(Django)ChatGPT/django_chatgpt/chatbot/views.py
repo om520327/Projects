@@ -53,7 +53,20 @@ def chatbot(request):
 
 
 def login(request):
-    return render(request,'login.html')
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        # authenticating the password and username exsist
+        user = auth.authenticate(request, username=username, password=password)
+        # if user exsists we login user then redirect them to chatbot page
+        if user is not None:
+            auth.login(request, user)
+            return redirect('chatbot')
+        else:
+            error_message = "invalid username or password"
+            return render(request, 'login.html', {'error_message' : error_message})
+    else:
+        return render(request,'login.html')
 
 # want to add cred to db and auto log user in
 # in register.html we have a form for users cred
@@ -88,3 +101,4 @@ def register(request):
 
 def logout(request):
     auth.logout(request)
+    return redirect('login')
