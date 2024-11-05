@@ -1,5 +1,6 @@
 import os
 import openai
+from django.utils import timezone
 from openai.types.chat import ChatCompletion
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
@@ -7,6 +8,7 @@ from dotenv import load_dotenv
 from openai import OpenAI
 from django.contrib import auth
 from django.contrib.auth.models import User
+from .models import Chat
 
 ### Since we are using LLM STUDIO set up is a little different than openai ###
 # load_dotenv()
@@ -47,8 +49,9 @@ def chatbot(request):
     if request.method == 'POST':
         message = request.POST.get('message')
         response = response_ai(message)
+        chat = Chat(user=request.user, message=message, response=response, created_at=timezone.now)
+        chat.save()
         return JsonResponse({'messsage':message, 'response':response})
-
     return render(request,'chatbot.html')
 
 
