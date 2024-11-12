@@ -29,6 +29,7 @@ ALLOWED_HOSTS = []
 
 
 # Application definition
+# we have to add our new app "posts" here, this will let our django project know there is a new app within it
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -37,6 +38,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "posts",
 ]
 
 MIDDLEWARE = [
