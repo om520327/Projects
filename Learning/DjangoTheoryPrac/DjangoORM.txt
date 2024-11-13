@@ -1,0 +1,12 @@
+ORM: Object relational mapping
+intermediary between python code and database
+when we execute something in our python code the ORM allows that to also be executed in our database
+"py manage.py shell" to enter shell in terminal
+once in interactiveconsole we can actually use the ORM to make changes to our database
+within the interactiveconsole we must import out model (in our case posts)
+"from posts.models import Post
+p = Post()
+p.title = "my first post!"
+p.save()
+"
+this will make a new post and use ORM to actually save it in the database
