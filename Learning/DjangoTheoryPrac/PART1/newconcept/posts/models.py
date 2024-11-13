@@ -1,6 +1,8 @@
 from django.db import models
-# models.py models ur data and each type of data will have a table inm a db
-# we use migration to take our python code here and turn it into tables  
+# models.py models ur data and each type of data will have a table in a db
+# we use migration to take our python code here (our model) and turn it into tables in our database
+# "py manage.py makemigrations" to make ur model migrations first (anytime a new model is added)
+# "py manage.py migrate" to do migration 
 
 # Create your models here.
 
