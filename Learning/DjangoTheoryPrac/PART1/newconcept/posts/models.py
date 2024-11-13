@@ -17,3 +17,8 @@ class Post(models.Model):
     # "auto_now_add=True" means a date time stamp will be added everytime a user adds another post
     date = models.DateTimeField(auto_now_add=True)
 
+    # we will define a method to return the title of the posts we save in our database
+    # since this is not actually changing the data of the model we do not need to do another migration
+    def __str__(self):
+        return self.title
+

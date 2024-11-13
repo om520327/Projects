@@ -10,3 +10,6 @@ p.title = "my first post!"
 p.save()
 "
 this will make a new post and use ORM to actually save it in the database
+to see all our posts we type in our interactiveconsole "Post.objects.all()"
+this will return <QuerySet[<>]> the default will tell you how many objects are there
+since we added a method to return the posts title, we will have more information returned to us about each Post
