@@ -11,6 +11,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% comment %} block title here is default, will be replaced if other pages use a title {% endcomment %}
     <title> {% block title %} Django App {% endblock %} </title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <script src="{% static 'js/main.js' %}" defer></script>
@@ -20,6 +21,7 @@
       <a href="/">🏠</a> | <a href="/about">😀</a> |
       <a href="/posts">📰</a>
     </nav>
+    {% comment %} content can be added here later {% endcomment %}
     <main> {% block content %} {% endblock %} </main>
   </body>
 </html>
