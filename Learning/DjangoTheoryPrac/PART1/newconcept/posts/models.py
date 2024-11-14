@@ -13,6 +13,7 @@ class Post(models.Model):
     # these fields also relate to form inputs(how you accept the data for each field) which should be kept in mind
     title = models.CharField(max_length=75)
     body =  models.TextField()
+    # a slug is what you would see at the end of the url
     slug = models.SlugField()
     # "auto_now_add=True" means a date time stamp will be added everytime a user adds another post
     date = models.DateTimeField(auto_now_add=True)
