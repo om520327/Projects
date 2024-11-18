@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Post
-from django.http import HttpResponse
+
 # since this is a new app we need to tell our django project in settings.py
 # that we added a new app to the project
 
@@ -15,4 +15,6 @@ def posts_list(request):
 
 
 def post_page(request, slug):
-    return HttpResponse(slug)
+    # this will get the one post we have that matches the slug that was passed through
+    post = Post.objects.get(slug=slug)
+    return render(request,'posts/post_page.html', {"post": post})
