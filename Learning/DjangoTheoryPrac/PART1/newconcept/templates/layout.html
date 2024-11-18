@@ -21,7 +21,7 @@
       <a href="/">🏠</a> | <a href="/about">😀</a> |
       {% comment %} (will use named URL instead) <a href="/posts">📰</a> {% endcomment %}
       {% comment %} using named url links instead of normal html links allows you to pass parameters and other layers of detail {% endcomment %}
-      <a href="{% url 'posts' %}">📰</a>
+      <a href="{% url 'posts:list' %}">📰</a>
     </nav>
     {% comment %} content can be added here later {% endcomment %}
     <main> {% block content %} {% endblock %} </main>

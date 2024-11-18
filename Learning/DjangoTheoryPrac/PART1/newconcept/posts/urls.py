@@ -6,8 +6,13 @@ from . import views
 # once you do it you have accsses to all template folders within your project
 # that is why we dont have to do anything extra for posts app template folder
 # by adding the name field we can now use the named URL when reffering to this adress(look in layout.html)
+
+# once or project has more apps, its smart to add a namespace like below
+# when linking html and url include name space exp:  <a href="{% url 'posts:page' slug=post.slug %}"> the name space would be posts here
+app_name = 'posts'
+
 urlpatterns = [
-    path('', views.posts_list, name="posts"),
+    path('', views.posts_list, name="list"),
     # we will use a path converter more specificly with slug
     # If the URL is /example-post, the slug variable will have the value 'example-post'.
     # slug (before :): Indicates that the segment should match the slug format.
