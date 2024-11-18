@@ -18,10 +18,16 @@
   </head>
   <body>
     <nav>
-      <a href="/">🏠</a> | <a href="/about">😀</a> |
+      <a href="/">
+        <span role="img" aria-label="Home">🏠</span>
+      </a> | <a href="/about">
+        <span role="img" aria-label="About">😀</span>
+      </a> |
       {% comment %} (will use named URL instead) <a href="/posts">📰</a> {% endcomment %}
       {% comment %} using named url links instead of normal html links allows you to pass parameters and other layers of detail {% endcomment %}
-      <a href="{% url 'posts:list' %}">📰</a>
+      <a href="{% url 'posts:list' %}">
+        <span role="img" aria-label="Posts">📰</span>
+      </a>
     </nav>
     {% comment %} content can be added here later {% endcomment %}
     <main> {% block content %} {% endblock %} </main>
