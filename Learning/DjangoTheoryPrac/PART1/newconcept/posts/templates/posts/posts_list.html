@@ -10,7 +10,12 @@
     {% for post in posts %}
     {% comment %} we use an article tag since we will have multiple posts {% endcomment %}
         <article class = "post">
-            <h2>{{post.title}}</h2>
+            <h2>
+                {% comment %} localhost:port/posts/first-post ('first-post' is the slug of the first post){% endcomment %}
+                <a href="{% url 'page' slug=post.slug %}">
+                    {{post.title}}
+                </a>
+            </h2>
             <p>{{post.date}}</p>
             <p>{{post.body}}</p>
         </article>

@@ -8,7 +8,13 @@ from . import views
 # by adding the name field we can now use the named URL when reffering to this adress(look in layout.html)
 urlpatterns = [
     path('', views.posts_list, name="posts"),
-]
+    # we will use a path converter more specificly with slug
+    # If the URL is /example-post, the slug variable will have the value 'example-post'.
+    # slug (before :): Indicates that the segment should match the slug format.
+    # slug (after :): The name of the variable passed to the view.
+    # The slug path converter ensures that the dynamic segment of a URL only matches a valid slug pattern.
+    path('<slug:slug>', views.post_page, name="page"),
+    ]
 
 # since this is url patterns from a app within our project 
 # we need to register those urlpatterns in our main url.py file
