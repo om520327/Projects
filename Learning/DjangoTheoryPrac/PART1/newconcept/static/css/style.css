@@ -42,4 +42,10 @@ a {
 a:hover {
   opacity: 0.85;
 }
+
+.banner {
+  display: block;
+  width: 100%;
+  max-width: 200px;
+}
 /* must also tell django where this folder is in settings.py */
