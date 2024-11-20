@@ -19,6 +19,8 @@ from django.contrib import admin
 # other applications in our project to our main project
 from django.urls import path, include
 from . import views
+from django.conf.urls import static
+from django.conf import settings
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -31,3 +33,7 @@ urlpatterns = [
     # application that is created inside our project
     path('posts/', include('posts.urls'))
 ]
+# static(): A helper function from django.conf.urls.static that serves static or media files during development.
+# This line appends a route to the urlpatterns to allow the development server to serve media files uploaded by users.
+# This setup is typically used only during development because Django's development server can serve files directly. In production, serving media files is handled by a web server (like Nginx or Apache) or a CDN.
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
