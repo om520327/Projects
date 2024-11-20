@@ -22,6 +22,7 @@ class Post(models.Model):
     slug = models.SlugField()
     # "auto_now_add=True" means a date time stamp will be added everytime a user adds another post
     date = models.DateTimeField(auto_now_add=True)
+    banner = models.ImageField(default='fallback.png', blank=True)
 
     # we will define a method to return the title of the posts we save in our database
     # since this is not actually changing the data of the model we do not need to do another migration

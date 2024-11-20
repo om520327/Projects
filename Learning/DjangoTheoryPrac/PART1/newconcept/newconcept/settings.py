@@ -125,7 +125,7 @@ STATICFILES_DIRS = [
 ]
 
 # telling django project what our media dirc is called
-MEDIA_URL = 'media/'
+MEDIA_URL = "media/"
 # telling django project where our media dirc is 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
